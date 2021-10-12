@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-one-light)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -52,11 +52,47 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+;;
+
+;; mirror setting
+(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+                           ("melpa" . "http://elpa.emacs-china.org/melpa/")))
 
 
 ;; Font
 (setq doom-font (font-spec :family "FiraMono Nerd Font" :size 12))
 
 ;; Java config
-(setenv "JAVA_HOME" "/Library/Java/JavaVirtualMachines/jdk-15.0.2.jdk/Contents/Home")
-(setq lsp-java-vmargs '("-Xmx1G" "-XX:+UseG1GC" "-XX:+UseStringDeduplication" "-javaagent:/Users/zhangruobin/.emacs.d/.local/etc/lsp/eclipse.jdt.ls/lombok.jar" "-Xbootclasspath/a:-javaagent:/Users/zhangruobin/.emacs.d/.local/etc/lsp/eclipse.jdt.ls/lombok.jar"))
+;; (setenv "JAVA_HOME" "/Library/Java/JavaVirtualMachines/jdk-15.0.2.jdk/Contents/Home")
+(setq lsp-java-vmargs '("-Xmx2G" "-Xms1G" "-XX:+UseG1GC" "-XX:+UseStringDeduplication" "-javaagent:/Users/zhangruobin/.emacs.d/.local/etc/lsp/eclipse.jdt.ls/lombok.jar"))
+(setq lsp-java-configuration-runtimes '[(:name "JavaSE-1.8"
+                                         :path "/Library/Java/JavaVirtualMachines/jdk1.8.0_291.jdk/Contents/Home")
+                                        (:name "JavaSE-15"
+                                         :path "/usr/local/Cellar/openjdk/15.0.1/"
+                                         :default t)])
+
+
+;; lsp ui mapper
+(map! :leader
+      :desc "Code Outline"
+      "c O" #'lsp-ui-imenu)
+
+(map! :leader
+      :desc "Find Refrence"
+      "c F" #'lsp-ui-peek-find-references)
+
+(map! :leader
+      :desc "Find Refrence"
+      "c D" #'lsp-ui-peek-find-definitions)
+
+(map! :leader
+      :desc "Find Refrence"
+      "c K" #'lsp-ui-doc-glance)
+
+;;evil escape
+
+(setq-default evil-escape-key-sequence "jj")
+
+;; org download
+(add-hook 'dired-mode-hook 'org-download-enable)
+(setq-default org-download-image-dir "~/org/pics")
