@@ -1,0 +1,6 @@
+#+TITLE: doom emacs config
+
+* org mode
+#+begin_src emacs-lisp
+    (defun native-comp-available-p () nil)
+#+end_src

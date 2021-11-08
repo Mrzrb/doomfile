@@ -51,3 +51,6 @@
 
 (package! evil-escape)
 (package! org-download)
+(package! org-bullets)
+
+
