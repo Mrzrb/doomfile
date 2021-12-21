@@ -52,5 +52,4 @@
 (package! evil-escape)
 (package! org-download)
 (package! org-bullets)
-
-
+(package! vscode-dark-plus-theme)

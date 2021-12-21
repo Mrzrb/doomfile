@@ -6,15 +6,29 @@
 ** Editor
 #+begin_src emacs-lisp
     (setq display-line-numbers-type t)
+    (setq fancy-splash-image "/Users/zhangruobin/.doom.d/static/mc.png")
+    (with-eval-after-load 'evil-maps
+        (define-key evil-normal-state-map (kbd ",w") 'evil-write))
+
+#+end_src
+** env settings
+#+begin_src 
+
 #+end_src
 ** Theme
 #+begin_src emacs-lisp
-    (setq doom-theme 'doom-one-light)
+    (setq doom-theme 'vscode-dark-plus)
 #+end_src
+
 ** Font
 #+begin_src emacs-lisp
     ;; Font
-    (setq doom-font (font-spec :family "FiraMono Nerd Font" :size 12))
+    (setq doom-font (font-spec :family "Cascadia Code PL" :size 12))
+#+end_src
+** proxy setting
+#+begin_src emacs-lisp
+(setq url-proxy-services '(("http" . "127.0.0.1:7890")
+                           ("https" . "127.0.0.1:7890")))
 #+end_src
 
 ** Mirror settings
@@ -26,21 +40,35 @@
 
 ** Key Bindings
 #+begin_src emacs-lisp
-    (map! :leader
-        :desc "Code Outline"
-        "c O" #'lsp-ui-imenu)
+(map! :leader
+      :desc "Code Outline"
+      "c O" #'lsp-ui-imenu)
 
-    (map! :leader
-        :desc "Find Refrence"
-        "c F" #'lsp-ui-peek-find-references)
+(map! :leader
+      :desc "Find Refrence"
+      "c F" #'lsp-ui-peek-find-references)
 
-    (map! :leader
-        :desc "Find Refrence"
-        "c D" #'lsp-ui-peek-find-definitions)
+(map! :leader
+      :desc "Find Refrence"
+      "c D" #'lsp-ui-peek-find-definitions)
 
-    (map! :leader
-        :desc "Find Refrence"
-        "c K" #'lsp-ui-doc-glance)
+(map! :leader
+      :desc "Find Refrence"
+      "c K" #'lsp-ui-doc-glance)
+
+(map! :leader
+      :desc "find in project"
+      "/" #'consult-ripgrep)
+
+(global-set-key (kbd "M-j") 'drag-stuff-down)
+(global-set-key (kbd "M-k") 'drag-stuff-up)
+(global-set-key (kbd "M-f") 'avy-goto-word-or-subword-1)
+#+end_src
+
+* Lsp settings
+LSP's number of listen files
+#+begin_src emacs-lisp
+(setq lsp-file-watch-threshold 3000)
 #+end_src
 
 * Plugins
@@ -64,6 +92,10 @@ This is config of org mode
                                             :path "/usr/local/Cellar/openjdk/15.0.1/"
                                             :default t)])
 
+#+end_src
+*** dap features
+#+begin_src emacs-lisp
+(setq dap-auto-configure-features '(sessions locals controls tooltip))
 #+end_src
 
 ** Evil
