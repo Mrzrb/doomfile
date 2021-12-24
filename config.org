@@ -5,15 +5,15 @@
 
 ** Editor
 #+begin_src emacs-lisp
-    (setq display-line-numbers-type t)
-    (setq fancy-splash-image "/Users/zhangruobin/.doom.d/static/mc.png")
-    (with-eval-after-load 'evil-maps
-        (define-key evil-normal-state-map (kbd ",w") 'evil-write))
-
+(setq display-line-numbers-type t)
+(setq fancy-splash-image "/Users/zhangruobin/.doom.d/static/mc.png")
+(with-eval-after-load 'evil-maps
+  (define-key evil-normal-state-map (kbd ",w") 'evil-write))
 #+end_src
 ** env settings
-#+begin_src 
-
+#+begin_src emacs-lisp
+(exec-path-from-shell-copy-env "GOPROXY")
+(exec-path-from-shell-copy-env "GOROOT")
 #+end_src
 ** Theme
 #+begin_src emacs-lisp
@@ -23,7 +23,7 @@
 ** Font
 #+begin_src emacs-lisp
     ;; Font
-    (setq doom-font (font-spec :family "Cascadia Code PL" :size 12))
+    (setq doom-font (font-spec :family "Cascadia Code PL" :size 13))
 #+end_src
 ** proxy setting
 #+begin_src emacs-lisp
@@ -93,6 +93,7 @@ This is config of org mode
                                             :default t)])
 
 #+end_src
+
 *** dap features
 #+begin_src emacs-lisp
 (setq dap-auto-configure-features '(sessions locals controls tooltip))
@@ -102,3 +103,10 @@ This is config of org mode
 #+begin_src emacs-lisp
     (setq-default evil-escape-key-sequence "jj")
 #+end_src
+** EAF applications
+#+begin_src emacs-lisp
+;;(require 'eaf)
+;;(require 'eaf-browser)
+;;(setq eaf-python-command "/usr/local/bin/python3")
+#+end_src
+
