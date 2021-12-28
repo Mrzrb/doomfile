@@ -17,14 +17,52 @@
 #+end_src
 ** Theme
 #+begin_src emacs-lisp
-    (setq doom-theme 'vscode-dark-plus)
+    (setq doom-theme 'adwaita)
 #+end_src
+
 
 ** Font
 #+begin_src emacs-lisp
     ;; Font
-    (setq doom-font (font-spec :family "Cascadia Code PL" :size 13))
+(setq doom-font (font-spec :family "Cascadia Code PL" :size 13))
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8)
+
+(when (window-system)
+  (set-frame-font "Fira Code"))
+(let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
+               (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
+               (36 . ".\\(?:>\\)")
+               (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
+               (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
+               (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
+               (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
+               (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
+               (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
+               (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
+               (48 . ".\\(?:x[a-zA-Z]\\)")
+               (58 . ".\\(?:::\\|[:=]\\)")
+               (59 . ".\\(?:;;\\|;\\)")
+               (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
+               (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
+               (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
+               (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
+               (91 . ".\\(?:]\\)")
+               (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+               (94 . ".\\(?:=\\)")
+               (119 . ".\\(?:ww\\)")
+               (123 . ".\\(?:-\\)")
+               (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
+               (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
+               )
+             ))
+  (dolist (char-regexp alist)
+    (set-char-table-range composition-function-table (car char-regexp)
+                          `([,(cdr char-regexp) 0 font-shape-gstring]))))
 #+end_src
+
+#+RESULTS:
+
 ** proxy setting
 #+begin_src emacs-lisp
 (setq url-proxy-services '(("http" . "127.0.0.1:7890")
@@ -103,10 +141,29 @@ This is config of org mode
 #+begin_src emacs-lisp
     (setq-default evil-escape-key-sequence "jj")
 #+end_src
-** EAF applications
+
+** Playground for fun
 #+begin_src emacs-lisp
-;;(require 'eaf)
-;;(require 'eaf-browser)
-;;(setq eaf-python-command "/usr/local/bin/python3")
 #+end_src
 
+** Leetcode plugin
+#+begin_src emacs-lisp
+(defvar leetcode-l "golang")
+(setq leetcode-save-solutions 't)
+(setq leetcode-prefer-language leetcode-l)
+(setq leetcode-directory (concat "~/leetcode/" leetcode-l))
+
+#+end_src
+*** Keymap -> leetcode |>
+
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "leetcode"
+      "l t" #'leetcode)
+(map! :leader
+      :desc "leetcode-test"
+      "l T" #'leetcode-try)
+(map! :leader
+      :desc "leetcode-submit"
+      "l s" #'leetcode-submit)
+#+end_src
