@@ -17,7 +17,7 @@
 #+end_src
 ** Theme
 #+begin_src emacs-lisp
-    (setq doom-theme 'adwaita)
+(setq doom-theme 'doom-xcode)
 #+end_src
 
 
@@ -27,6 +27,7 @@
 (setq doom-font (font-spec :family "Cascadia Code PL" :size 13))
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
+
 
 (when (window-system)
   (set-frame-font "Fira Code"))
@@ -61,7 +62,6 @@
                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
 #+end_src
 
-#+RESULTS:
 
 ** proxy setting
 #+begin_src emacs-lisp
@@ -107,9 +107,17 @@
 LSP's number of listen files
 #+begin_src emacs-lisp
 (setq lsp-file-watch-threshold 3000)
+(setq lsp-enable-symbol-highlighting t)
+(setq lsp-ui-doc-enable t)
+(setq lsp-ui-doc-enable t)
+(setq lsp-lens-enable nil)
 #+end_src
 
 * Plugins
+** Treemacs
+*** key bindings
+#+begin_src emacs-lisp
+#+end_src
 ** org mode
 This is config of org mode
 
@@ -166,4 +174,56 @@ This is config of org mode
 (map! :leader
       :desc "leetcode-submit"
       "l s" #'leetcode-submit)
+#+end_src
+** Hugo blog
+#+begin_src emacs-lisp
+ (setq org-hugo-base-dir "/Users/zhangruobin/ZRB-DATA/commerce/blogs")
+#+end_src
+** Org
+
+#+begin_src emacs-lisp
+
+#+end_src
+
+*** Org Roam
+#+begin_src emacs-lisp
+(setq org-roam-directory "/Users/zhangruobin/home/personal/learn/notes")
+#+end_src
+**** Org roam ui
+#+begin_src emacs-lisp
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+#+end_src
+** Eaf
+#+begin_src emacs-lisp
+;;(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
+;;(require 'eaf)
+;;(require 'eaf-browser)
+;;(require 'eaf-pdf-viewer)
+;;(require 'eaf-terminal)
+#+end_src
+
+** Org download :ATTACH:
+:PROPERTIES:
+:ID:       e6080bfa-932c-48e0-b270-1c0a69f5caab
+:END:
+#+begin_src emacs-lisp
+(require 'org-download)
+(setq-default org-download-image-dir "/Users/zhangruobin/home/personal/learn/notes/assets/pics/")
+#+end_src
+** tree-sitter
+#+begin_src emacs-lisp
+(setq global-tree-sitter-mode t)
 #+end_src

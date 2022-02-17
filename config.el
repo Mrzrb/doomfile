@@ -6,12 +6,13 @@
 (exec-path-from-shell-copy-env "GOPROXY")
 (exec-path-from-shell-copy-env "GOROOT")
 
-(setq doom-theme 'adwaita)
+(setq doom-theme 'doom-xcode)
 
 ;; Font
 (setq doom-font (font-spec :family "Cascadia Code PL" :size 13))
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
+
 
 (when (window-system)
   (set-frame-font "Fira Code"))
@@ -77,6 +78,12 @@
 (global-set-key (kbd "M-f") 'avy-goto-word-or-subword-1)
 
 (setq lsp-file-watch-threshold 3000)
+(setq lsp-enable-symbol-highlighting t)
+(setq lsp-ui-doc-enable t)
+(setq lsp-ui-doc-enable t)
+(setq lsp-lens-enable nil)
+
+
 
 ;;Add this for bug of org mode
 (defun native-comp-available-p () nil)
@@ -111,3 +118,35 @@
 (map! :leader
       :desc "leetcode-submit"
       "l s" #'leetcode-submit)
+
+(setq org-hugo-base-dir "/Users/zhangruobin/ZRB-DATA/commerce/blogs")
+
+
+
+(setq org-roam-directory "/Users/zhangruobin/home/personal/learn/notes")
+
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+
+;;(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
+;;(require 'eaf)
+;;(require 'eaf-browser)
+;;(require 'eaf-pdf-viewer)
+;;(require 'eaf-terminal)
+
+(require 'org-download)
+(setq-default org-download-image-dir "/Users/zhangruobin/home/personal/learn/notes/assets/pics/")
+
+(setq global-tree-sitter-mode t)

@@ -53,3 +53,12 @@
 (package! org-download)
 (package! org-bullets)
 (package! vscode-dark-plus-theme)
+(unpin! org-roam)
+(package! org-roam-ui)
+(package! xenops)
+(package! tree-sitter)
+(package! tree-sitter-langs)
+
+
+;;themes
+(package! spacemacs-theme)
